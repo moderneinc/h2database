@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.lang.reflect.Array;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
@@ -466,7 +467,7 @@ public class ScriptCommand extends ScriptBase {
 
     private static <T extends DbObject> T[] sorted(Collection<T> collection, Class<T> clazz) {
         @SuppressWarnings("unchecked")
-        T[] array = collection.toArray((T[]) java.lang.reflect.Array.newInstance(clazz, 0));
+        T[] array = collection.toArray((T[]) Array.newInstance(clazz, 0));
         Arrays.sort(array, BY_NAME_COMPARATOR);
         return array;
     }

@@ -10,6 +10,7 @@ import java.nio.channels.NonWritableChannelException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.h2.compress.CompressLZF;
 import org.h2.util.MathUtils;
@@ -296,7 +297,7 @@ class FileNioMemData {
      * @return the new position
      */
     long readWrite(long pos, ByteBuffer b, int off, int len, boolean write) {
-        final java.util.concurrent.locks.Lock lock = write ? rwLock.writeLock()
+        final Lock lock = write ? rwLock.writeLock()
                 : rwLock.readLock();
         lock.lock();
         try {

@@ -24,6 +24,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.RowId;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.Duration;
@@ -442,7 +443,7 @@ public class TestPreparedStatement extends TestDb {
         stat.executeUpdate("insert into test values(current_timestamp)");
         PreparedStatement prep = conn.prepareStatement(
                 "update test set tm = coalesce(?,tm)");
-        prep.setTimestamp(1, new java.sql.Timestamp(System.currentTimeMillis()));
+        prep.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
         prep.executeUpdate();
         stat.executeUpdate("drop table test");
     }
@@ -552,11 +553,11 @@ public class TestPreparedStatement extends TestDb {
         stat.execute("create table test_uuid(id uuid primary key)");
         UUID origUUID = UUID.fromString(uuidStr);
         PreparedStatement prep = conn.prepareStatement("insert into test_uuid values(?)");
-        prep.setObject(1, origUUID, java.sql.Types.JAVA_OBJECT);
+        prep.setObject(1, origUUID, Types.JAVA_OBJECT);
         prep.execute();
 
         prep = conn.prepareStatement("select * from test_uuid where id=?");
-        prep.setObject(1, origUUID, java.sql.Types.JAVA_OBJECT);
+        prep.setObject(1, origUUID, Types.JAVA_OBJECT);
         ResultSet rs = prep.executeQuery();
         rs.next();
         Object o = rs.getObject(1);
@@ -1182,7 +1183,7 @@ public class TestPreparedStatement extends TestDb {
         prep.setNull(2, Types.INTEGER);
         prep.executeUpdate();
         prep.setInt(1, 5);
-        prep.setBigDecimal(2, new java.math.BigDecimal("0"));
+        prep.setBigDecimal(2, new BigDecimal("0"));
         prep.executeUpdate();
         prep.setInt(1, 6);
         prep.setString(2, "-1");
@@ -1340,11 +1341,11 @@ public class TestPreparedStatement extends TestDb {
         prep.setObject(7, Long.MAX_VALUE);
         prep.setObject(8, Float.MAX_VALUE);
         prep.setObject(9, Double.MAX_VALUE);
-        prep.setObject(10, java.sql.Date.valueOf("2001-02-03"));
-        prep.setObject(11, java.sql.Time.valueOf("04:05:06"));
-        prep.setObject(12, java.sql.Timestamp.valueOf(
+        prep.setObject(10, Date.valueOf("2001-02-03"));
+        prep.setObject(11, Time.valueOf("04:05:06"));
+        prep.setObject(12, Timestamp.valueOf(
                 "2001-02-03 04:05:06.123456789"));
-        prep.setObject(13, new java.util.Date(java.sql.Date.valueOf(
+        prep.setObject(13, new java.util.Date(Date.valueOf(
                 "2001-02-03").getTime()));
         prep.setObject(14, new byte[] { 10, 20, 30 });
         prep.setObject(15, 'a', Types.JAVA_OBJECT);
@@ -1353,7 +1354,7 @@ public class TestPreparedStatement extends TestDb {
         prep.setObject(17, "2001-01-02", Types.NULL);
         prep.setObject(18, "3.725", Types.DOUBLE);
         prep.setObject(19, "23:22:21", Types.TIME);
-        prep.setObject(20, new java.math.BigInteger("12345"), Types.JAVA_OBJECT);
+        prep.setObject(20, new BigInteger("12345"), Types.JAVA_OBJECT);
         prep.setArray(21, conn.createArrayOf("TINYINT", new Object[] {(byte) 1}));
         prep.setArray(22, conn.createArrayOf("SMALLINT", new Object[] {(short) -2}));
         rs = prep.executeQuery();
@@ -1368,24 +1369,24 @@ public class TestPreparedStatement extends TestDb {
         assertTrue(rs.getObject(8).equals(Float.MAX_VALUE));
         assertTrue(rs.getObject(9).equals(Double.MAX_VALUE));
         assertTrue(rs.getObject(10).equals(
-                java.sql.Date.valueOf("2001-02-03")));
+                Date.valueOf("2001-02-03")));
         assertEquals("04:05:06", rs.getObject(11).toString());
         assertTrue(rs.getObject(11).equals(
-                java.sql.Time.valueOf("04:05:06")));
+                Time.valueOf("04:05:06")));
         assertTrue(rs.getObject(12).equals(
-                java.sql.Timestamp.valueOf("2001-02-03 04:05:06.123456789")));
+                Timestamp.valueOf("2001-02-03 04:05:06.123456789")));
         assertTrue(rs.getObject(13).equals(
-                java.sql.Timestamp.valueOf("2001-02-03 00:00:00")));
+                Timestamp.valueOf("2001-02-03 00:00:00")));
         assertEquals(new byte[] { 10, 20, 30 }, (byte[]) rs.getObject(14));
         assertTrue(rs.getObject(15).equals('a'));
         assertTrue(rs.getObject(16).equals(
-                java.sql.Date.valueOf("2001-01-02")));
+                Date.valueOf("2001-01-02")));
         assertTrue(rs.getObject(17) == null && rs.wasNull());
         assertTrue(rs.getObject(18).equals(3.725d));
         assertTrue(rs.getObject(19).equals(
-                java.sql.Time.valueOf("23:22:21")));
+                Time.valueOf("23:22:21")));
         assertTrue(rs.getObject(20).equals(
-                new java.math.BigInteger("12345")));
+                new BigInteger("12345")));
         Object[] a = (Object[]) ((Array) rs.getObject(21)).getArray();
         assertEquals(a[0], Integer.valueOf(1));
         a = (Object[]) ((Array) rs.getObject(22)).getArray();
@@ -1666,12 +1667,12 @@ public class TestPreparedStatement extends TestDb {
     private void checkBigDecimal(ResultSet rs, String[] value) throws SQLException {
         for (String v : value) {
             assertTrue(rs.next());
-            java.math.BigDecimal x = rs.getBigDecimal(1);
+            BigDecimal x = rs.getBigDecimal(1);
             trace("v=" + v + " x=" + x);
             if (v == null) {
                 assertNull(x);
             } else {
-                assertTrue(x.compareTo(new java.math.BigDecimal(v)) == 0);
+                assertTrue(x.compareTo(new BigDecimal(v)) == 0);
             }
         }
         assertFalse(rs.next());

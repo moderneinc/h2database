@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -125,7 +126,7 @@ public class ArchiveTool {
             log.println();
         }
         log.println("Compressing " + size / MB + " MB at " +
-                new java.sql.Time(startMs).toString());
+                new Time(startMs).toString());
         InputStream in = getDirectoryInputStream(fromDir);
         String temp = toFile + ".temp";
         OutputStream out =
@@ -151,7 +152,7 @@ public class ArchiveTool {
         long start = System.nanoTime();
         long startMs = System.currentTimeMillis();
         long size = new File(fromFile).length();
-        log.println("Extracting " + size / MB + " MB at " + new java.sql.Time(startMs).toString());
+        log.println("Extracting " + size / MB + " MB at " + new Time(startMs).toString());
         InputStream in =
                 new BufferedInputStream(
                         new FileInputStream(fromFile), 1024 * 1024);

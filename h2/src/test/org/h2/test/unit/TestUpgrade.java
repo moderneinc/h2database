@@ -7,6 +7,7 @@ package org.h2.test.unit;
 
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,7 +53,7 @@ public class TestUpgrade extends TestBase {
         byte[] bytes = new byte[10_000];
         r.nextBytes(bytes);
         String s = new String(bytes, StandardCharsets.ISO_8859_1);
-        java.sql.Driver driver = Upgrade.loadH2(build);
+        Driver driver = Upgrade.loadH2(build);
         try {
             assertEquals(major, driver.getMajorVersion());
             assertEquals(minor, driver.getMinorVersion());

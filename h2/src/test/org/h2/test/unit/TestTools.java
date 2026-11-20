@@ -38,6 +38,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+
+import org.h2.Driver;
 import org.h2.api.ErrorCode;
 import org.h2.engine.SysProperties;
 import org.h2.store.FileLister;
@@ -91,7 +93,7 @@ public class TestTools extends TestDb {
     @Override
     public void test() throws Exception {
         DeleteDbFiles.execute(getBaseDir(), null, true);
-        org.h2.Driver.load();
+        Driver.load();
         testSimpleResultSet();
         testTcpServerWithoutPort();
         testConsole();
@@ -723,7 +725,7 @@ public class TestTools extends TestDb {
 
     private void testConvertTraceFile() throws Exception {
         deleteDb("toolsConvertTraceFile");
-        org.h2.Driver.load();
+        Driver.load();
         String url = "jdbc:h2:" + getBaseDir() + "/toolsConvertTraceFile";
         url = getURL(url, true);
         Connection conn = getConnection(url + ";TRACE_LEVEL_FILE=3", "sa", "sa");
@@ -748,9 +750,9 @@ public class TestTools extends TestDb {
         prep.setShort(4, Short.MIN_VALUE);
         prep.setBoolean(5, false);
         prep.setBytes(6, new byte[] { (byte) 10, (byte) 20 });
-        prep.setDate(7, java.sql.Date.valueOf("2007-12-31"));
-        prep.setTime(8, java.sql.Time.valueOf("23:59:59"));
-        prep.setTimestamp(9, java.sql.Timestamp.valueOf("2007-12-31 23:59:59"));
+        prep.setDate(7, Date.valueOf("2007-12-31"));
+        prep.setTime(8, Time.valueOf("23:59:59"));
+        prep.setTimestamp(9, Timestamp.valueOf("2007-12-31 23:59:59"));
         prep.executeUpdate();
         conn.close();
 
@@ -811,7 +813,7 @@ public class TestTools extends TestDb {
             return;
         }
         deleteDb("toolsRecover");
-        org.h2.Driver.load();
+        Driver.load();
         String url = getURL("toolsRecover", true);
         Connection conn = getConnection(url, "sa", "sa");
         Statement stat = conn.createStatement();
@@ -994,7 +996,7 @@ public class TestTools extends TestDb {
     }
 
     private void testBackupRestore() throws SQLException {
-        org.h2.Driver.load();
+        Driver.load();
         String url = "jdbc:h2:" + getBaseDir() + "/testBackupRestore";
         String user = "sa", password = "abc";
         final String fileName = getBaseDir() + "/b2.zip";
@@ -1026,7 +1028,7 @@ public class TestTools extends TestDb {
     }
 
     private void testChangeFileEncryption(boolean split) throws SQLException {
-        org.h2.Driver.load();
+        Driver.load();
         final String dir = (split ? "split:19:" : "") + getBaseDir();
         String url = "jdbc:h2:" + dir + "/testChangeFileEncryption;CIPHER=AES";
         DeleteDbFiles.execute(dir, "testChangeFileEncryption", true);
@@ -1054,7 +1056,7 @@ public class TestTools extends TestDb {
     }
 
     private void testChangeFileEncryptionWithWrongPassword() throws SQLException {
-        org.h2.Driver.load();
+        Driver.load();
         final String dir = getBaseDir();
         String url = "jdbc:h2:" + dir + "/testChangeFileEncryption;CIPHER=AES";
         DeleteDbFiles.execute(dir, "testChangeFileEncryption", true);

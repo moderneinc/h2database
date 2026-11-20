@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.h2.Driver;
 import org.h2.test.utils.SelfDestructor;
 import org.h2.tools.DeleteDbFiles;
 
@@ -139,7 +140,7 @@ public abstract class TestDb extends TestBase {
 
     private static Connection getConnectionInternal(String url, String user,
             String password) throws SQLException {
-        org.h2.Driver.load();
+        Driver.load();
         // url += ";DEFAULT_TABLE_TYPE=1";
         // Class.forName("org.hsqldb.jdbcDriver");
         // return DriverManager.getConnection("jdbc:hsqldb:" + name, "sa", "");

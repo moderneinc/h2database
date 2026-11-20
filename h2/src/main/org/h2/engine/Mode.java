@@ -8,6 +8,7 @@ package org.h2.engine;
 import java.sql.Types;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -693,7 +694,7 @@ public class Mode {
         mode.serialDataTypes = true;
         mode.numericIsDecfloat = true;
         // Enumerate all H2 types NOT supported by PostgreSQL:
-        Set<String> disallowedTypes = new java.util.HashSet<>();
+        Set<String> disallowedTypes = new HashSet<>();
         disallowedTypes.add("NUMBER");
         disallowedTypes.add("TINYINT");
         disallowedTypes.add("BLOB");

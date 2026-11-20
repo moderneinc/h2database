@@ -7,6 +7,7 @@ package org.h2.test.synth.sql;
 
 import java.util.ArrayList;
 
+import org.h2.Driver;
 import org.h2.test.TestAll;
 import org.h2.test.TestBase;
 import org.h2.test.TestDb;
@@ -291,7 +292,7 @@ public class TestSynth extends TestDb {
         // "");
 
         mode = H2_MEM;
-        org.h2.Driver.load();
+        Driver.load();
         addDatabase("org.h2.Driver", "jdbc:h2:mem:synth", "sa", "", true);
         addDatabase("org.h2.Driver", "jdbc:h2:" +
                 getBaseDir() + "/synth/synth", "sa", "", false);

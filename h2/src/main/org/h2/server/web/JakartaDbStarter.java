@@ -12,7 +12,7 @@ import java.sql.Statement;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
-
+import org.h2.Driver;
 import org.h2.tools.Server;
 import org.h2.util.StringUtils;
 
@@ -29,7 +29,7 @@ public class JakartaDbStarter implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         try {
-            org.h2.Driver.load();
+            Driver.load();
 
             // This will get the setting from a context-param in web.xml if
             // defined:

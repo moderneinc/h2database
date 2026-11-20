@@ -299,7 +299,7 @@ public class JdbcUtils {
         } else {
             Class<?> d = loadUserClass(driver);
             try {
-                if (java.sql.Driver.class.isAssignableFrom(d)) {
+                if (Driver.class.isAssignableFrom(d)) {
                     Driver driverInstance = (Driver) d.getDeclaredConstructor().newInstance();
                     Properties prop = new Properties();
                     if (user != null) {
@@ -318,7 +318,7 @@ public class JdbcUtils {
                         return connection;
                     }
                     throw new SQLException("Driver " + driver + " is not suitable for " + url, "08001");
-                } else if (javax.naming.Context.class.isAssignableFrom(d)) {
+                } else if (Context.class.isAssignableFrom(d)) {
                     if (!url.startsWith("java:")) {
                         throw new SQLException("Only java scheme is supported for JNDI lookups", "08001");
                     }

@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
+
+import org.h2.Driver;
 import org.h2.test.TestBase;
 import org.h2.test.TestDb;
 import org.h2.tools.DeleteDbFiles;
@@ -77,7 +79,7 @@ public class TestBtreeIndex extends TestDb {
     }
 
     private void testOne(int seed) throws SQLException {
-        org.h2.Driver.load();
+        Driver.load();
         deleteDb(getTestName());
         printTime("testIndex " + seed);
         Random random = new Random(seed);

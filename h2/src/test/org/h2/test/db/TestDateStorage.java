@@ -202,10 +202,10 @@ public class TestDateStorage extends TestDb {
         String s = "2040-10-" + ("" + d).substring(1);
         // some dates don't work in some versions of Java
         // http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6772689
-        java.sql.Date date = java.sql.Date.valueOf(s);
+        Date date = Date.valueOf(s);
         long time = date.getTime();
         while (true) {
-            date = new java.sql.Date(time);
+            date = new Date(time);
             String x = date.toString();
             if (x.equals(s)) {
                 break;

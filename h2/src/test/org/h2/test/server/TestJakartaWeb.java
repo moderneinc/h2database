@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.Principal;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
@@ -385,7 +386,7 @@ public class TestJakartaWeb extends TestDb {
         }
 
         @Override
-        public java.util.Collection<Part> getParts() {
+        public Collection<Part> getParts() {
             return null;
         }
 
@@ -654,12 +655,12 @@ public class TestJakartaWeb extends TestDb {
         }
 
         @Override
-        public java.util.Collection<String> getHeaders(String name) {
+        public Collection<String> getHeaders(String name) {
             return null;
         }
 
         @Override
-        public java.util.Collection<String> getHeaderNames() {
+        public Collection<String> getHeaderNames() {
             return null;
         }
 

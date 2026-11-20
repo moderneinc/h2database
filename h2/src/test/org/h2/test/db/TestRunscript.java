@@ -20,6 +20,7 @@ import org.h2.api.ErrorCode;
 import org.h2.api.Trigger;
 import org.h2.engine.Constants;
 import org.h2.store.fs.FileUtils;
+import org.h2.test.TestAll;
 import org.h2.test.TestBase;
 import org.h2.test.TestDb;
 import org.h2.tools.ChangeFileEncryption;
@@ -38,7 +39,7 @@ public class TestRunscript extends TestDb implements Trigger {
      */
     public static void main(String... a) throws Exception {
         TestBase.createCaller().init().testFromMain();
-        org.h2.test.TestAll config = new org.h2.test.TestAll();
+        TestAll config = new TestAll();
         config.traceLevelFile = 1;
         System.out.println(config);
         TestBase test = createCaller();

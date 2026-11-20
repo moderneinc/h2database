@@ -18,6 +18,7 @@ import java.nio.file.StandardCopyOption;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
@@ -164,7 +165,7 @@ public final class Upgrade {
         copyProperty(ci, oldUrl, "MV_STORE");
         String cipher = copyProperty(ci, oldUrl, "CIPHER");
         String scriptCommandSuffix = cipher == null ? "" : " CIPHER AES PASSWORD '" + UUID.randomUUID() + "' --hide--";
-        java.sql.Driver driver = loadH2(version);
+        Driver driver = loadH2(version);
         try (Connection conn = driver.connect(oldUrl.toString(), oldInfo)) {
             conn.createStatement().execute(StringUtils.quoteStringSQL(new StringBuilder("SCRIPT TO "), script)
                     .append(scriptCommandSuffix).toString());
@@ -230,7 +231,7 @@ public final class Upgrade {
      * @throws ReflectiveOperationException
      *             on exception during initialization of the driver
      */
-    public static java.sql.Driver loadH2(int version) throws IOException, ReflectiveOperationException {
+    public static Driver loadH2(int version) throws IOException, ReflectiveOperationException {
         String prefix;
         if (version >= 201) {
             if ((version & 1) != 0 || version > Constants.BUILD_ID) {
@@ -279,7 +280,7 @@ public final class Upgrade {
                 return b != null ? new ByteArrayInputStream(b) : null;
             }
         };
-        return (java.sql.Driver) cl.loadClass("org.h2.Driver").getDeclaredMethod("load").invoke(null);
+        return (Driver) cl.loadClass("org.h2.Driver").getDeclaredMethod("load").invoke(null);
     }
 
     /**
@@ -290,7 +291,7 @@ public final class Upgrade {
      * @throws ReflectiveOperationException
      *             on exception
      */
-    public static void unloadH2(java.sql.Driver driver) throws ReflectiveOperationException {
+    public static void unloadH2(Driver driver) throws ReflectiveOperationException {
         driver.getClass().getDeclaredMethod("unload").invoke(null);
     }
 

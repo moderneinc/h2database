@@ -24,6 +24,8 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
+import org.h2.Driver;
 import org.h2.dev.fs.FilePathZip2;
 import org.h2.message.DbException;
 import org.h2.mvstore.DataUtils;
@@ -36,6 +38,7 @@ import org.h2.test.TestBase;
 import org.h2.test.utils.FilePathDebug;
 import org.h2.tools.Backup;
 import org.h2.tools.DeleteDbFiles;
+import org.h2.tools.Restore;
 import org.h2.util.IOUtils;
 import org.h2.util.Task;
 
@@ -267,7 +270,7 @@ public class TestFileSystem extends TestBase {
     }
 
     private void testDatabaseInMemFileSys() throws SQLException {
-        org.h2.Driver.load();
+        Driver.load();
         String dir = getBaseDir() + "/fsMem";
         FileUtils.deleteRecursive(dir, false);
         String url = "jdbc:h2:" + dir + "/fsMem";
@@ -277,7 +280,7 @@ public class TestFileSystem extends TestBase {
         conn.createStatement().execute(
                 "BACKUP TO '" + getBaseDir() + "/fsMem.zip'");
         conn.close();
-        org.h2.tools.Restore.main("-file", getBaseDir() + "/fsMem.zip", "-dir", "memFS:");
+        Restore.main("-file", getBaseDir() + "/fsMem.zip", "-dir", "memFS:");
         conn = DriverManager.getConnection("jdbc:h2:memFS:fsMem", "sa", "sa");
         ResultSet rs = conn.createStatement()
                 .executeQuery("SELECT * FROM TEST");
@@ -295,7 +298,7 @@ public class TestFileSystem extends TestBase {
         if (config.networked) {
             return;
         }
-        org.h2.Driver.load();
+        Driver.load();
         String dir = getBaseDir() + "/fsJar";
         String url = "jdbc:h2:" + dir + "/fsJar";
         Connection conn = DriverManager.getConnection(url, "sa", "sa");

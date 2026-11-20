@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.lang.ref.Reference;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import org.h2.api.ErrorCode;
@@ -62,7 +63,7 @@ public class FileStore {
     private Reference<?> autoDeleteReference;
     private boolean checkedWriting = true;
     private final String mode;
-    private java.nio.channels.FileLock lock;
+    private FileLock lock;
 
     /**
      * Create a new file using the given settings.

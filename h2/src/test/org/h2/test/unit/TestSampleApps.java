@@ -13,10 +13,22 @@ import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
+
+import org.h2.samples.CachedPreparedStatements;
+import org.h2.samples.Compact;
+import org.h2.samples.CsvSample;
+import org.h2.samples.Function;
+import org.h2.samples.ReadOnlyDatabaseInZip;
+import org.h2.samples.RowAccessRights;
+import org.h2.samples.TriggerPassData;
+import org.h2.samples.TriggerSample;
+import org.h2.samples.UpdatableView;
 import org.h2.store.fs.FileUtils;
 import org.h2.test.TestBase;
 import org.h2.test.TestDb;
+import org.h2.tools.ChangeFileEncryption;
 import org.h2.tools.DeleteDbFiles;
+import org.h2.tools.RunScript;
 import org.h2.util.IOUtils;
 import org.h2.util.StringUtils;
 
@@ -52,20 +64,20 @@ public class TestSampleApps extends TestDb {
                 "/optimizations.sql");
         IOUtils.copyAndClose(in, out);
         String url = "jdbc:h2:" + getBaseDir() + "/" + getTestName();
-        testApp("", org.h2.tools.RunScript.class, "-url", url, "-user", "sa",
+        testApp("", RunScript.class, "-url", url, "-user", "sa",
                 "-password", "sa", "-script", getBaseDir() +
                         "/optimizations.sql", "-checkResults");
         deleteDb(getTestName());
-        testApp("Compacting...\nDone.", org.h2.samples.Compact.class);
+        testApp("Compacting...\nDone.", Compact.class);
         testApp("NAME: Bob Meier\n" +
                 "EMAIL: bob.meier@abcde.abc\n" +
                 "PHONE: +41123456789\n\n" +
                 "NAME: John Jones\n" +
                 "EMAIL: john.jones@abcde.abc\n" +
                 "PHONE: +41976543210\n",
-                org.h2.samples.CsvSample.class);
+                CsvSample.class);
         testApp("",
-                org.h2.samples.CachedPreparedStatements.class);
+                CachedPreparedStatements.class);
         testApp("2 is prime\n" +
                 "3 is prime\n" +
                 "5 is prime\n" +
@@ -81,40 +93,40 @@ public class TestSampleApps extends TestDb {
                 "1/0\n" +
                 "1/1\n" +
                 "10",
-                org.h2.samples.Function.class);
+                Function.class);
         // Not compatible with PostgreSQL JDBC driver (throws a
         // NullPointerException):
         // testApp(org.h2.samples.SecurePassword.class, null, "Joe");
         // TODO test ShowProgress (percent numbers are hardware specific)
         // TODO test ShutdownServer (server needs to be started in a separate
         // process)
-        testApp("The sum is 20.00", org.h2.samples.TriggerSample.class);
-        testApp("Hello: 1\nWorld: 2", org.h2.samples.TriggerPassData.class);
+        testApp("The sum is 20.00", TriggerSample.class);
+        testApp("Hello: 1\nWorld: 2", TriggerPassData.class);
         testApp("Key 1 was generated\n" +
                 "Key 2 was generated\n\n" +
                 "TEST_TABLE:\n" +
                 "1 Hallo\n\n" +
                 "TEST_VIEW:\n" +
                 "1 Hallo",
-                org.h2.samples.UpdatableView.class);
+                UpdatableView.class);
         testApp(
                 "adding test data...\n" +
                 "defrag to reduce random access...\n" +
                 "create the zip file...\n" +
                 "open the database from the zip file...",
-                org.h2.samples.ReadOnlyDatabaseInZip.class);
+                ReadOnlyDatabaseInZip.class);
         testApp(
                 "a: 1/Hello!\n" +
                 "b: 1/Hallo!\n" +
                 "1/A/Hello!\n" +
                 "1/B/Hallo!",
-                org.h2.samples.RowAccessRights.class);
+                RowAccessRights.class);
 
         // tools
         testApp("Allows changing the database file encryption password or algorithm*",
-                org.h2.tools.ChangeFileEncryption.class, "-help");
+                ChangeFileEncryption.class, "-help");
         testApp("Deletes all files belonging to a database.*",
-                org.h2.tools.DeleteDbFiles.class, "-help");
+                DeleteDbFiles.class, "-help");
         FileUtils.delete(getBaseDir() + "/optimizations.sql");
     }
 

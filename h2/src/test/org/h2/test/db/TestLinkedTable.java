@@ -14,6 +14,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+
+import org.h2.Driver;
 import org.h2.api.ErrorCode;
 import org.h2.store.fs.FileUtils;
 import org.h2.test.TestBase;
@@ -130,7 +132,7 @@ public class TestLinkedTable extends TestDb {
         if (config.memory) {
             return;
         }
-        org.h2.Driver.load();
+        Driver.load();
         deleteDb("linkedTable");
         Connection conn = getConnection(
                 "linkedTable;SHARE_LINKED_CONNECTIONS=TRUE");
@@ -175,7 +177,7 @@ public class TestLinkedTable extends TestDb {
         if (config.memory) {
             return;
         }
-        org.h2.Driver.load();
+        Driver.load();
         deleteDb("linkedTable");
         String url = getURL("linkedTable;SHARE_LINKED_CONNECTIONS=TRUE", true);
         String user = getUser();
@@ -198,7 +200,7 @@ public class TestLinkedTable extends TestDb {
         if (config.memory) {
             return;
         }
-        org.h2.Driver.load();
+        Driver.load();
         deleteDb("linkedTable");
         String url = getURL("linkedTable;SHARE_LINKED_CONNECTIONS=TRUE", true);
         String user = getUser();
@@ -218,7 +220,7 @@ public class TestLinkedTable extends TestDb {
     }
 
     private void testMultipleSchemas() throws SQLException {
-        org.h2.Driver.load();
+        Driver.load();
         Connection ca = DriverManager.getConnection("jdbc:h2:mem:one", "sa", "sa");
         Connection cb = DriverManager.getConnection("jdbc:h2:mem:two", "sa", "sa");
         Statement sa = ca.createStatement();
@@ -246,7 +248,7 @@ public class TestLinkedTable extends TestDb {
     }
 
     private void testReadOnlyLinkedTable() throws SQLException {
-        org.h2.Driver.load();
+        Driver.load();
         Connection ca = DriverManager.getConnection("jdbc:h2:mem:one", "sa", "sa");
         Connection cb = DriverManager.getConnection("jdbc:h2:mem:two", "sa", "sa");
         Statement sa = ca.createStatement();
@@ -282,7 +284,7 @@ public class TestLinkedTable extends TestDb {
     }
 
     private static void testLinkOtherSchema() throws SQLException {
-        org.h2.Driver.load();
+        Driver.load();
         Connection ca = DriverManager.getConnection("jdbc:h2:mem:one", "sa", "sa");
         Connection cb = DriverManager.getConnection("jdbc:h2:mem:two", "sa", "sa");
         Statement sa = ca.createStatement();
@@ -303,7 +305,7 @@ public class TestLinkedTable extends TestDb {
     }
 
     private void testLinkTwoTables() throws SQLException {
-        org.h2.Driver.load();
+        Driver.load();
         Connection conn = DriverManager.getConnection(
                 "jdbc:h2:mem:one", "sa", "sa");
         Statement stat = conn.createStatement();
@@ -329,7 +331,7 @@ public class TestLinkedTable extends TestDb {
     }
 
     private static void testLinkDrop() throws SQLException {
-        org.h2.Driver.load();
+        Driver.load();
         Connection connA = DriverManager.getConnection("jdbc:h2:mem:a");
         Statement statA = connA.createStatement();
         statA.execute("CREATE TABLE TEST(ID INT)");
@@ -357,7 +359,7 @@ public class TestLinkedTable extends TestDb {
 
         deleteDb("linked1");
         deleteDb("linked2");
-        org.h2.Driver.load();
+        Driver.load();
 
         String url1 = getURL("linked1", true);
         String url2 = getURL("linked2", true);
@@ -420,7 +422,7 @@ public class TestLinkedTable extends TestDb {
 
         deleteDb("linked1");
         deleteDb("linked2");
-        org.h2.Driver.load();
+        Driver.load();
         String url1 = getURL("linked1", true);
         String url2 = getURL("linked2", true);
 
@@ -451,7 +453,7 @@ public class TestLinkedTable extends TestDb {
 
         deleteDb("linked1");
         deleteDb("linked2");
-        org.h2.Driver.load();
+        Driver.load();
 
         String url1 = getURL("linked1", true);
         String url2 = getURL("linked2", true);
@@ -586,7 +588,7 @@ public class TestLinkedTable extends TestDb {
     }
 
     private void testCachingResults() throws SQLException {
-        org.h2.Driver.load();
+        Driver.load();
         Connection ca = DriverManager.getConnection(
                 "jdbc:h2:mem:one", "sa", "sa");
         Connection cb = DriverManager.getConnection(
@@ -656,7 +658,7 @@ public class TestLinkedTable extends TestDb {
         }
 
         deleteDb("testLinkedTableInReadOnlyDb");
-        org.h2.Driver.load();
+        Driver.load();
 
         Connection memConn = DriverManager.getConnection(
                 "jdbc:h2:mem:one", "sa", "sa");
@@ -699,7 +701,7 @@ public class TestLinkedTable extends TestDb {
         if (config.memory) {
             return;
         }
-        org.h2.Driver.load();
+        Driver.load();
         Connection ca = DriverManager.getConnection("jdbc:h2:mem:one", "sa", "sa");
         Connection cb = DriverManager.getConnection("jdbc:h2:mem:two", "sa", "sa");
         Statement sa = ca.createStatement();
@@ -725,7 +727,7 @@ public class TestLinkedTable extends TestDb {
         if (config.memory) {
             return;
         }
-        org.h2.Driver.load();
+        Driver.load();
         Connection ca = DriverManager.getConnection("jdbc:h2:mem:one", "sa", "sa");
         Connection cb = DriverManager.getConnection("jdbc:h2:mem:two", "sa", "sa");
         Statement sa = ca.createStatement();
@@ -752,7 +754,7 @@ public class TestLinkedTable extends TestDb {
         if (config.memory) {
             return;
         }
-        org.h2.Driver.load();
+        Driver.load();
         Connection ca = DriverManager.getConnection("jdbc:h2:mem:one", "sa", "sa");
         Connection cb = DriverManager.getConnection("jdbc:h2:mem:two", "sa", "sa");
         Statement sa = ca.createStatement();
@@ -779,7 +781,7 @@ public class TestLinkedTable extends TestDb {
         if (config.memory) {
             return;
         }
-        org.h2.Driver.load();
+        Driver.load();
         Connection ca = DriverManager.getConnection("jdbc:h2:mem:one", "sa", "sa");
         Connection cb = DriverManager.getConnection("jdbc:h2:mem:two", "sa", "sa");
         Statement sa = ca.createStatement();

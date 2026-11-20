@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.concurrent.TimeUnit;
 
+import org.h2.Driver;
 import org.h2.api.DatabaseEventListener;
 import org.h2.api.ErrorCode;
 import org.h2.engine.Constants;
@@ -114,7 +115,7 @@ public class TestOpenClose extends TestDb {
         }
         deleteDb("openClose");
         String url = getURL("openClose", true);
-        org.h2.Driver.load();
+        Driver.load();
         Connection conn = DriverManager.getConnection(url, "sa", "abc def");
         Statement stat = conn.createStatement();
         stat.execute("CREATE TABLE TEST(C CLOB)");
@@ -139,7 +140,7 @@ public class TestOpenClose extends TestDb {
         }
         deleteDb("openClose");
         String url = getURL("openClose", true);
-        org.h2.Driver.load();
+        Driver.load();
         Connection conn = DriverManager.getConnection(url, "sa", "abc def");
         Statement stat = conn.createStatement();
 
@@ -220,7 +221,7 @@ public class TestOpenClose extends TestDb {
             return;
         }
 
-        org.h2.Driver.load();
+        Driver.load();
         deleteDb("openClose");
         final String url = getURL("openClose;FILE_LOCK=NO", true);
         final String user = getUser(), password = getPassword();

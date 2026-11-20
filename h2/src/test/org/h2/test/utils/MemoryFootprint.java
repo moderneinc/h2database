@@ -8,6 +8,10 @@ package org.h2.test.utils;
 import java.lang.instrument.Instrumentation;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+
 import org.h2.engine.Constants;
 import org.h2.result.Row;
 import org.h2.store.Data;
@@ -27,9 +31,9 @@ public class MemoryFootprint {
     public static void main(String... a) {
         // System.getProperties().store(System.out, "");
         print("Object", new Object());
-        print("Timestamp", new java.sql.Timestamp(0));
-        print("Date", new java.sql.Date(0));
-        print("Time", new java.sql.Time(0));
+        print("Timestamp", new Timestamp(0));
+        print("Date", new Date(0));
+        print("Time", new Time(0));
         print("BigDecimal", new BigDecimal("0"));
         print("BigInteger", new BigInteger("0"));
         print("String", new String("Hello"));

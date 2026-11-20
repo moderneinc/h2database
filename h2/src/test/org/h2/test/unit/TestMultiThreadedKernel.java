@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.h2.Driver;
 import org.h2.test.TestBase;
 import org.h2.test.TestDb;
 
@@ -68,7 +69,7 @@ public class TestMultiThreadedKernel extends TestDb implements Runnable {
     @Override
     public void run() {
         try {
-            org.h2.Driver.load();
+            Driver.load();
             Connection conn = DriverManager.getConnection(url +
                     ";LOCK_MODE=3;WRITE_DELAY=0",
                     user, password);
