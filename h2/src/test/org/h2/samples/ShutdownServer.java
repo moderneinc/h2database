@@ -7,6 +7,8 @@ package org.h2.samples;
 
 import java.sql.SQLException;
 
+import org.h2.tools.Server;
+
 /**
  * This very simple sample application stops a H2 TCP server
  * if it is running.
@@ -21,6 +23,6 @@ public class ShutdownServer {
      * @throws SQLException on failure
      */
     public static void main(String... args) throws SQLException {
-        org.h2.tools.Server.shutdownTcpServer("tcp://localhost:9094", "", false, false);
+        Server.shutdownTcpServer("tcp://localhost:9094", "", false, false);
     }
 }

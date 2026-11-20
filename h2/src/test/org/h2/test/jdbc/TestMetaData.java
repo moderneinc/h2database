@@ -9,6 +9,8 @@ import static org.h2.engine.Constants.MAX_ARRAY_CARDINALITY;
 import static org.h2.engine.Constants.MAX_NUMERIC_PRECISION;
 import static org.h2.engine.Constants.MAX_STRING_LENGTH;
 
+import java.sql.Blob;
+import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.Driver;
@@ -120,8 +122,8 @@ public class TestMetaData extends TestDb {
         assertEquals("java.sql.Blob", rsMeta.getColumnClassName(1));
         assertEquals("java.sql.Clob", rsMeta.getColumnClassName(2));
         rs.next();
-        assertTrue(rs.getObject(1) instanceof java.sql.Blob);
-        assertTrue(rs.getObject(2) instanceof java.sql.Clob);
+        assertTrue(rs.getObject(1) instanceof Blob);
+        assertTrue(rs.getObject(2) instanceof Clob);
         stat.executeUpdate("DROP TABLE t");
         conn.close();
     }

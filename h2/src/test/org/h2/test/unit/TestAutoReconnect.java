@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import org.h2.Driver;
 import org.h2.api.DatabaseEventListener;
 import org.h2.api.ErrorCode;
 import org.h2.test.TestBase;
@@ -42,7 +44,7 @@ public class TestAutoReconnect extends TestDb {
                 connServer.createStatement().execute("SHUTDOWN");
                 connServer.close();
             }
-            org.h2.Driver.load();
+            Driver.load();
             connServer = getConnection(url);
         } else {
             server.stop();

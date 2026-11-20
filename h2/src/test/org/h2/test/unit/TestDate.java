@@ -390,7 +390,7 @@ public class TestDate extends TestBase {
     private static void testDate(int y, int m, int day) {
         long millis = LegacyDateTimeUtils.getMillis(null, TimeZone.getDefault(), DateTimeUtils.dateValue(y, m, day),
                 0);
-        String st = new java.sql.Date(millis).toString();
+        String st = new Date(millis).toString();
         int y2 = Integer.parseInt(st.substring(0, 4));
         int m2 = Integer.parseInt(st.substring(5, 7));
         int d2 = Integer.parseInt(st.substring(8, 10));

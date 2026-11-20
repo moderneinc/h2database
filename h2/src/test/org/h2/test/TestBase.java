@@ -30,12 +30,14 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.SimpleTimeZone;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
+import org.h2.Driver;
 import org.h2.engine.SessionLocal;
 import org.h2.jdbc.JdbcConnection;
 import org.h2.message.DbException;
@@ -533,7 +535,7 @@ public abstract class TestBase {
      * @param actual the actual value
      * @throws AssertionError if the values are not equal
      */
-    public void assertEquals(java.util.Date expected, java.util.Date actual) {
+    public void assertEquals(Date expected, Date actual) {
         if (!Objects.equals(expected, actual)) {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
             SimpleTimeZone gmt = new SimpleTimeZone(0, "Z");
@@ -1405,7 +1407,7 @@ public abstract class TestBase {
      * @return the new test
      */
     public static TestBase createCaller() {
-        org.h2.Driver.load();
+        Driver.load();
         try {
             return (TestBase) new SecurityManager() {
                 Class<?> clazz = getClassContext()[2];

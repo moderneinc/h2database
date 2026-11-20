@@ -6,7 +6,10 @@
 package org.h2.message;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 
@@ -255,7 +258,7 @@ public abstract class TraceObject {
      * @param x the time to convert
      * @return the Java source code
      */
-    protected static String quoteTime(java.sql.Time x) {
+    protected static String quoteTime(Time x) {
         if (x == null) {
             return "null";
         }
@@ -268,7 +271,7 @@ public abstract class TraceObject {
      * @param x the timestamp to convert
      * @return the Java source code
      */
-    protected static String quoteTimestamp(java.sql.Timestamp x) {
+    protected static String quoteTimestamp(Timestamp x) {
         if (x == null) {
             return "null";
         }
@@ -281,7 +284,7 @@ public abstract class TraceObject {
      * @param x the date to convert
      * @return the Java source code
      */
-    protected static String quoteDate(java.sql.Date x) {
+    protected static String quoteDate(Date x) {
         if (x == null) {
             return "null";
         }

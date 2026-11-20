@@ -875,7 +875,7 @@ public class SimpleResultSet implements ResultSet, ResultSetMetaData {
             return (T) getObject(columnIndex);
         } else if (type == byte[].class) {
             return (T) getBytes(columnIndex);
-        } else if (type == java.sql.Array.class) {
+        } else if (type == Array.class) {
             return (T) getArray(columnIndex);
         } else if (type == Blob.class) {
             return (T) getBlob(columnIndex);

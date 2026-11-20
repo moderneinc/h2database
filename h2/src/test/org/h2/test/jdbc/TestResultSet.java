@@ -1344,9 +1344,9 @@ public class TestResultSet extends TestDb {
                 new int[] { Types.INTEGER, Types.TIMESTAMP },
                 new int[] { 32, 26 }, new int[] { 0, 6 });
         rs.next();
-        java.sql.Date date;
-        java.sql.Time time;
-        java.sql.Timestamp ts;
+        Date date;
+        Time time;
+        Timestamp ts;
         date = rs.getDate(2);
         assertFalse(rs.wasNull());
         time = rs.getTime(2);
@@ -1357,41 +1357,41 @@ public class TestResultSet extends TestDb {
                 " Timestamp:" + ts.toString());
         trace("Date ms: " + date.getTime() + " Time ms:" + time.getTime() +
                 " Timestamp ms:" + ts.getTime());
-        trace("1970 ms: " + java.sql.Timestamp.valueOf(
+        trace("1970 ms: " + Timestamp.valueOf(
                 "1970-01-01 00:00:00.0").getTime());
-        assertEquals(java.sql.Timestamp.valueOf(
+        assertEquals(Timestamp.valueOf(
                 "2011-11-11 00:00:00.0").getTime(), date.getTime());
-        assertEquals(java.sql.Timestamp.valueOf(
+        assertEquals(Timestamp.valueOf(
                 "1970-01-01 00:00:00.0").getTime(), time.getTime());
-        assertEquals(java.sql.Timestamp.valueOf(
+        assertEquals(Timestamp.valueOf(
                 "2011-11-11 00:00:00.0").getTime(), ts.getTime());
         assertTrue(date.equals(
-                java.sql.Date.valueOf("2011-11-11")));
+                Date.valueOf("2011-11-11")));
         assertTrue(time.equals(
-                java.sql.Time.valueOf("00:00:00")));
+                Time.valueOf("00:00:00")));
         assertTrue(ts.equals(
-                java.sql.Timestamp.valueOf("2011-11-11 00:00:00.0")));
+                Timestamp.valueOf("2011-11-11 00:00:00.0")));
         assertFalse(rs.wasNull());
         o = rs.getObject(2);
         trace(o.getClass().getName());
-        assertTrue(o instanceof java.sql.Timestamp);
-        assertTrue(((java.sql.Timestamp) o).equals(
-                java.sql.Timestamp.valueOf("2011-11-11 00:00:00.0")));
+        assertTrue(o instanceof Timestamp);
+        assertTrue(((Timestamp) o).equals(
+                Timestamp.valueOf("2011-11-11 00:00:00.0")));
         assertFalse(rs.wasNull());
-        o = rs.getObject(2, java.sql.Timestamp.class);
+        o = rs.getObject(2, Timestamp.class);
         trace(o.getClass().getName());
-        assertTrue(o instanceof java.sql.Timestamp);
-        assertTrue(((java.sql.Timestamp) o).equals(
-                        java.sql.Timestamp.valueOf("2011-11-11 00:00:00.0")));
+        assertTrue(o instanceof Timestamp);
+        assertTrue(((Timestamp) o).equals(
+                        Timestamp.valueOf("2011-11-11 00:00:00.0")));
         assertFalse(rs.wasNull());
         o = rs.getObject(2, java.util.Date.class);
         assertTrue(o.getClass() == java.util.Date.class);
         assertEquals(((java.util.Date) o).getTime(),
-                        java.sql.Timestamp.valueOf("2011-11-11 00:00:00.0").getTime());
+                        Timestamp.valueOf("2011-11-11 00:00:00.0").getTime());
         o = rs.getObject(2, Calendar.class);
         assertTrue(o instanceof Calendar);
         assertEquals(((Calendar) o).getTimeInMillis(),
-                        java.sql.Timestamp.valueOf("2011-11-11 00:00:00.0").getTime());
+                        Timestamp.valueOf("2011-11-11 00:00:00.0").getTime());
         rs.next();
 
         date = rs.getDate("VALUE");
@@ -1507,7 +1507,7 @@ public class TestResultSet extends TestDb {
         GregorianCalendar regular = new GregorianCalendar();
         GregorianCalendar other = null;
         // search a locale that has a _different_ raw offset
-        long testTime = java.sql.Date.valueOf("2001-02-03").getTime();
+        long testTime = Date.valueOf("2001-02-03").getTime();
         for (String s : TimeZone.getAvailableIDs()) {
             TimeZone zone = TimeZone.getTimeZone(s);
             long rawOffsetDiff = regular.getTimeZone().getRawOffset() -
@@ -1539,30 +1539,30 @@ public class TestResultSet extends TestDb {
         prep.execute();
 
         prep.setInt(1, 2);
-        prep.setDate(2, java.sql.Date.valueOf("2001-02-03"), regular);
-        prep.setTime(3, java.sql.Time.valueOf("04:05:06"), regular);
+        prep.setDate(2, Date.valueOf("2001-02-03"), regular);
+        prep.setTime(3, Time.valueOf("04:05:06"), regular);
         prep.setTimestamp(4,
-                java.sql.Timestamp.valueOf("2007-08-09 10:11:12.131415"), regular);
+                Timestamp.valueOf("2007-08-09 10:11:12.131415"), regular);
         prep.execute();
 
         prep.setInt(1, 3);
-        prep.setDate(2, java.sql.Date.valueOf("2101-02-03"), other);
-        prep.setTime(3, java.sql.Time.valueOf("14:05:06"), other);
+        prep.setDate(2, Date.valueOf("2101-02-03"), other);
+        prep.setTime(3, Time.valueOf("14:05:06"), other);
         prep.setTimestamp(4,
-                java.sql.Timestamp.valueOf("2107-08-09 10:11:12.131415"), other);
+                Timestamp.valueOf("2107-08-09 10:11:12.131415"), other);
         prep.execute();
 
         prep.setInt(1, 4);
-        prep.setDate(2, java.sql.Date.valueOf("2101-02-03"));
-        prep.setTime(3, java.sql.Time.valueOf("14:05:06"));
+        prep.setDate(2, Date.valueOf("2101-02-03"));
+        prep.setTime(3, Time.valueOf("14:05:06"));
         prep.setTimestamp(4,
-                java.sql.Timestamp.valueOf("2107-08-09 10:11:12.131415"));
+                Timestamp.valueOf("2107-08-09 10:11:12.131415"));
         prep.execute();
 
         prep.setInt(1, 5);
-        prep.setDate(2, java.sql.Date.valueOf("2101-02-03"), null);
-        prep.setTime(3, java.sql.Time.valueOf("14:05:06"), null);
-        prep.setTimestamp(4, java.sql.Timestamp.valueOf("2107-08-09 10:11:12.131415"), null);
+        prep.setDate(2, Date.valueOf("2101-02-03"), null);
+        prep.setTime(3, Time.valueOf("14:05:06"), null);
+        prep.setTimestamp(4, Timestamp.valueOf("2107-08-09 10:11:12.131415"), null);
         prep.execute();
 
         rs = stat.executeQuery("SELECT * FROM TEST ORDER BY ID");
@@ -1785,7 +1785,7 @@ public class TestResultSet extends TestDb {
                 32, Integer.MAX_VALUE }, new int[] { 0, 0 });
         rs.next();
         Object obj = rs.getObject(2);
-        assertTrue(obj instanceof java.sql.Clob);
+        assertTrue(obj instanceof Clob);
         string = rs.getString(2);
         assertTrue(string != null && string.equals("Test"));
         assertFalse(rs.wasNull());

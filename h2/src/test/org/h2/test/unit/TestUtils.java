@@ -5,6 +5,7 @@
  */
 package org.h2.test.unit;
 
+import java.awt.event.InputEvent;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -163,7 +164,7 @@ public class TestUtils extends TestBase {
         // Instance fields
         Utils.callStaticMethod("java.lang.String.valueOf", "a");
         Utils.callStaticMethod("java.awt.AWTKeyStroke.getAWTKeyStroke",
-                'x', java.awt.event.InputEvent.SHIFT_DOWN_MASK);
+                'x', InputEvent.SHIFT_DOWN_MASK);
     }
 
     private void testParseBooleanCheckFalse(String value) {

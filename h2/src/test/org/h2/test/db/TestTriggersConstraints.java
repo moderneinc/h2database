@@ -525,7 +525,7 @@ public class TestTriggersConstraints extends TestDb implements Trigger {
         stat.execute("create table test(id int primary key)");
         assertSingleValue(stat, callSeq, 1);
         conn.setAutoCommit(false);
-        Trigger t = new org.h2.test.db.TestTriggersConstraints.TestTriggerAlterTable();
+        Trigger t = new TestTriggersConstraints.TestTriggerAlterTable();
         t.close();
         if ("java".equals(sourceLang)) {
             String triggerClassName = this.getClass().getName() + "."

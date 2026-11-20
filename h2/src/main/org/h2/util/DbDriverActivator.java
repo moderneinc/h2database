@@ -5,6 +5,7 @@
  */
 package org.h2.util;
 
+import org.h2.Driver;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
@@ -26,7 +27,7 @@ public class DbDriverActivator implements BundleActivator {
      */
     @Override
     public void start(BundleContext bundleContext) {
-        org.h2.Driver driver = org.h2.Driver.load();
+        Driver driver = Driver.load();
         try {
             JdbcUtils.loadUserClass(DATASOURCE_FACTORY_CLASS);
         } catch (Exception e) {
@@ -46,7 +47,7 @@ public class DbDriverActivator implements BundleActivator {
      */
     @Override
     public void stop(BundleContext bundleContext) {
-        org.h2.Driver.unload();
+        Driver.unload();
     }
 
 }

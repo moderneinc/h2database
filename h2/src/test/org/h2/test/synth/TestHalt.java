@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
+
+import org.h2.Driver;
 import org.h2.test.TestAll;
 import org.h2.test.TestBase;
 import org.h2.test.utils.SelfDestructor;
@@ -132,7 +134,7 @@ public abstract class TestHalt extends TestBase {
     }
 
     Connection getConnection() throws SQLException {
-        org.h2.Driver.load();
+        Driver.load();
         String url = "jdbc:h2:" + getBaseDir() + "/halt";
         // String url = "jdbc:h2:" + baseDir + "/halt;TRACE_LEVEL_FILE=3";
         return DriverManager.getConnection(url, "sa", "sa");

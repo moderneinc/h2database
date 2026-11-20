@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.h2.Driver;
 import org.h2.api.DatabaseEventListener;
 import org.h2.test.TestBase;
 import org.h2.test.TestDb;
@@ -113,7 +114,7 @@ public class TestExit extends TestDb {
     }
 
     private static void execute(String url) throws SQLException {
-        org.h2.Driver.load();
+        Driver.load();
         conn = open(url);
         Connection conn2 = open(url);
         conn2.close();

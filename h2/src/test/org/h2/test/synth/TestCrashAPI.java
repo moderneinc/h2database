@@ -6,26 +6,34 @@
 package org.h2.test.synth;
 
 import java.io.File;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.io.Reader;
 import java.io.StringWriter;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.math.BigDecimal;
+import java.net.URL;
 import java.sql.BatchUpdateException;
 import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Clob;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
+import java.sql.Ref;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 import java.sql.Savepoint;
 import java.sql.Statement;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -34,6 +42,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.h2.Driver;
 import org.h2.api.ErrorCode;
 import org.h2.store.FileLister;
 import org.h2.store.fs.FileUtils;
@@ -111,7 +120,7 @@ public class TestCrashAPI extends TestDb implements Runnable {
     }
 
     private static void recoverAll() {
-        org.h2.Driver.load();
+        Driver.load();
         File[] files = new File("temp/backup").listFiles();
         Arrays.sort(files, Comparator.comparing(File::getName));
         for (File f : files) {
@@ -472,7 +481,7 @@ public class TestCrashAPI extends TestDb implements Runnable {
             // TODO test with 'shared' arrays (make sure database creates a
             // copy)
             return random.getIntArray();
-        } else if (type == java.io.Reader.class) {
+        } else if (type == Reader.class) {
             return null;
         } else if (type == java.sql.Array.class) {
             return null;
@@ -484,30 +493,30 @@ public class TestCrashAPI extends TestDb implements Runnable {
             return null;
         } else if (type == Object.class) {
             return null;
-        } else if (type == java.sql.Date.class) {
+        } else if (type == Date.class) {
             return random.randomDate();
-        } else if (type == java.sql.Time.class) {
+        } else if (type == Time.class) {
             return random.randomTime();
-        } else if (type == java.sql.Timestamp.class) {
+        } else if (type == Timestamp.class) {
             return random.randomTimestamp();
-        } else if (type == java.io.InputStream.class) {
+        } else if (type == InputStream.class) {
             return null;
         } else if (type == String[].class) {
             return null;
-        } else if (type == java.sql.Clob.class) {
+        } else if (type == Clob.class) {
             return null;
-        } else if (type == java.sql.Blob.class) {
+        } else if (type == Blob.class) {
             return null;
         } else if (type == Savepoint.class) {
             // TODO should use generated savepoints
             return null;
         } else if (type == Calendar.class) {
             return new GregorianCalendar();
-        } else if (type == java.net.URL.class) {
+        } else if (type == URL.class) {
             return null;
-        } else if (type == java.math.BigDecimal.class) {
-            return new java.math.BigDecimal("" + random.getRandomDouble());
-        } else if (type == java.sql.Ref.class) {
+        } else if (type == BigDecimal.class) {
+            return new BigDecimal("" + random.getRandomDouble());
+        } else if (type == Ref.class) {
             return null;
         }
         return null;

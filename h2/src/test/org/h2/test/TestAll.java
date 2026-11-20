@@ -7,11 +7,13 @@ package org.h2.test;
 
 import java.lang.management.ManagementFactory;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
@@ -982,7 +984,7 @@ kill -9 `jps -l | grep "org.h2.test." | cut -d " " -f 1`
         // fails on Raspberry Pi quite often (seems to be a JVM problem)
 
         // event queue watchdog for tests that get stuck when running in Jenkins
-        final java.util.Timer watchdog = new java.util.Timer();
+        final Timer watchdog = new Timer();
         // 5 minutes
         watchdog.schedule(new TimerTask() {
             @Override
@@ -1092,7 +1094,7 @@ kill -9 `jps -l | grep "org.h2.test." | cut -d " " -f 1`
     public static void printSystemInfo() {
         Properties prop = System.getProperties();
         System.out.println("H2 " + Constants.FULL_VERSION +
-                " @ " + new java.sql.Timestamp(System.currentTimeMillis()).toString());
+                " @ " + new Timestamp(System.currentTimeMillis()).toString());
         System.out.println("Java " +
                 prop.getProperty("java.runtime.version") + ", " +
                 prop.getProperty("java.vm.name")+", " +

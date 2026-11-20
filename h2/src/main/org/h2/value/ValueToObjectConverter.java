@@ -13,10 +13,13 @@ import java.math.BigInteger;
 import java.sql.Array;
 import java.sql.Blob;
 import java.sql.Clob;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.SQLXML;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -364,7 +367,7 @@ public final class ValueToObjectConverter extends TraceObject {
             return value.getInputStream();
         } else if (type == Reader.class) {
             return value.getReader();
-        } else if (type == java.sql.Array.class) {
+        } else if (type == Array.class) {
             return new JdbcArray(conn, value, getNextId(TraceObject.ARRAY));
         } else if (type == Blob.class) {
             return new JdbcBlob(conn, value, JdbcLob.State.WITH_VALUE, getNextId(TraceObject.BLOB));
@@ -441,13 +444,13 @@ public final class ValueToObjectConverter extends TraceObject {
         case Value.DOUBLE:
             return Double.class;
         case Value.DATE:
-            return forJdbc ? java.sql.Date.class : LocalDate.class;
+            return forJdbc ? Date.class : LocalDate.class;
         case Value.TIME:
-            return forJdbc ? java.sql.Time.class : LocalTime.class;
+            return forJdbc ? Time.class : LocalTime.class;
         case Value.TIME_TZ:
             return OffsetTime.class;
         case Value.TIMESTAMP:
-            return forJdbc ? java.sql.Timestamp.class : LocalDateTime.class;
+            return forJdbc ? Timestamp.class : LocalDateTime.class;
         case Value.TIMESTAMP_TZ:
             return OffsetDateTime.class;
         case Value.INTERVAL_YEAR:

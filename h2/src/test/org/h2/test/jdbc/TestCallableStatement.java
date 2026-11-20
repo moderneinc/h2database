@@ -14,12 +14,14 @@ import java.nio.charset.StandardCharsets;
 import java.sql.Array;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.Ref;
 import java.sql.ResultSet;
 import java.sql.RowId;
 import java.sql.SQLException;
 import java.sql.SQLXML;
 import java.sql.Statement;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.LocalDate;
@@ -163,19 +165,19 @@ public class TestCallableStatement extends TestDb {
         assertEquals(11, call.getBytes(1).length);
         assertEquals(11, call.getBlob(1).length());
 
-        call.setDate(2, java.sql.Date.valueOf("2000-01-01"));
+        call.setDate(2, Date.valueOf("2000-01-01"));
         call.registerOutParameter(1, Types.DATE);
         call.execute();
         assertEquals("2000-01-01", call.getDate(1).toString());
         assertEquals("2000-01-01", call.getObject(1, LocalDate.class).toString());
 
-        call.setTime(2, java.sql.Time.valueOf("01:02:03"));
+        call.setTime(2, Time.valueOf("01:02:03"));
         call.registerOutParameter(1, Types.TIME);
         call.execute();
         assertEquals("01:02:03", call.getTime(1).toString());
         assertEquals("01:02:03", call.getObject(1, LocalTime.class).toString());
 
-        call.setTimestamp(2, java.sql.Timestamp.valueOf(
+        call.setTimestamp(2, Timestamp.valueOf(
                 "2001-02-03 04:05:06.789"));
         call.registerOutParameter(1, Types.TIMESTAMP);
         call.execute();

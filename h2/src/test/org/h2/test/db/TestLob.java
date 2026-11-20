@@ -43,6 +43,7 @@ import org.h2.tools.Recover;
 import org.h2.tools.SimpleResultSet;
 import org.h2.util.IOUtils;
 import org.h2.util.JdbcUtils;
+import org.h2.util.StringUtils;
 import org.h2.util.Task;
 import org.h2.value.ValueBlob;
 import org.h2.value.ValueClob;
@@ -1608,7 +1609,7 @@ public class TestLob extends TestDb {
 
                 String insert = "insert into t1 (id, ver, data) values (1, 0, ?)";
                 try (PreparedStatement insertStmt = conn1.prepareStatement(insert)) {
-                    String largeData = org.h2.util.StringUtils.pad("", 512, "x", false);
+                    String largeData = StringUtils.pad("", 512, "x", false);
                     insertStmt.setString(1, largeData);
                     insertStmt.executeUpdate();
                 }

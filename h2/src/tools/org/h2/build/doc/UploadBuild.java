@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.zip.CRC32;
 import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
@@ -111,7 +112,7 @@ public class UploadBuild {
             buildSql = "create table item(id identity, title varchar, " +
                     "issued timestamp, desc varchar);\n";
         }
-        String ts = new java.sql.Timestamp(System.currentTimeMillis()).toString();
+        String ts = new Timestamp(System.currentTimeMillis()).toString();
         String now = ts.substring(0, 16);
         int idx = testOutput.indexOf("Statements per second: ");
         if (idx >= 0) {

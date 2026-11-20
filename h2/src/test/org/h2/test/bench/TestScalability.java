@@ -17,6 +17,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
+import org.h2.Driver;
 import org.h2.store.fs.FileUtils;
 import org.h2.test.TestBase;
 import org.h2.test.bench.Database.Measurement;
@@ -47,7 +49,7 @@ public class TestScalability implements Database.DatabaseTest {
     }
 
     private static Connection getResultConnection() throws SQLException {
-        org.h2.Driver.load();
+        Driver.load();
         return DriverManager.getConnection("jdbc:h2:./data/results");
     }
 

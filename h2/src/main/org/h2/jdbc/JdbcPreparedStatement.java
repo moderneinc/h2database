@@ -12,6 +12,7 @@ import java.net.URL;
 import java.sql.Array;
 import java.sql.Blob;
 import java.sql.Clob;
+import java.sql.Date;
 import java.sql.NClob;
 import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
@@ -22,6 +23,8 @@ import java.sql.RowId;
 import java.sql.SQLException;
 import java.sql.SQLType;
 import java.sql.SQLXML;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -424,7 +427,7 @@ public class JdbcPreparedStatement extends JdbcStatement implements PreparedStat
      * @see #setObject(int, Object)
      */
     @Override
-    public void setDate(int parameterIndex, java.sql.Date x) throws SQLException {
+    public void setDate(int parameterIndex, Date x) throws SQLException {
         try {
             if (isDebugEnabled()) {
                 debugCode("setDate(" + parameterIndex + ", " + quoteDate(x) + ')');
@@ -449,7 +452,7 @@ public class JdbcPreparedStatement extends JdbcStatement implements PreparedStat
      * @see #setObject(int, Object)
      */
     @Override
-    public void setTime(int parameterIndex, java.sql.Time x) throws SQLException {
+    public void setTime(int parameterIndex, Time x) throws SQLException {
         try {
             if (isDebugEnabled()) {
                 debugCode("setTime(" + parameterIndex + ", " + quoteTime(x) + ')');
@@ -474,7 +477,7 @@ public class JdbcPreparedStatement extends JdbcStatement implements PreparedStat
      * @see #setObject(int, Object)
      */
     @Override
-    public void setTimestamp(int parameterIndex, java.sql.Timestamp x) throws SQLException {
+    public void setTimestamp(int parameterIndex, Timestamp x) throws SQLException {
         try {
             if (isDebugEnabled()) {
                 debugCode("setTimestamp(" + parameterIndex + ", " + quoteTimestamp(x) + ')');
@@ -753,7 +756,7 @@ public class JdbcPreparedStatement extends JdbcStatement implements PreparedStat
      * @see #setObject(int, Object)
      */
     @Override
-    public void setDate(int parameterIndex, java.sql.Date x, Calendar calendar) throws SQLException {
+    public void setDate(int parameterIndex, Date x, Calendar calendar) throws SQLException {
         try {
             if (isDebugEnabled()) {
                 debugCode("setDate(" + parameterIndex + ", " + quoteDate(x) + ", calendar)");
@@ -785,7 +788,7 @@ public class JdbcPreparedStatement extends JdbcStatement implements PreparedStat
      * @see #setObject(int, Object)
      */
     @Override
-    public void setTime(int parameterIndex, java.sql.Time x, Calendar calendar) throws SQLException {
+    public void setTime(int parameterIndex, Time x, Calendar calendar) throws SQLException {
         try {
             if (isDebugEnabled()) {
                 debugCode("setTime(" + parameterIndex + ", " + quoteTime(x) + ", calendar)");
@@ -817,7 +820,7 @@ public class JdbcPreparedStatement extends JdbcStatement implements PreparedStat
      * @see #setObject(int, Object)
      */
     @Override
-    public void setTimestamp(int parameterIndex, java.sql.Timestamp x, Calendar calendar) throws SQLException {
+    public void setTimestamp(int parameterIndex, Timestamp x, Calendar calendar) throws SQLException {
         try {
             if (isDebugEnabled()) {
                 debugCode("setTimestamp(" + parameterIndex + ", " + quoteTimestamp(x) + ", calendar)");

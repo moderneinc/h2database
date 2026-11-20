@@ -10,9 +10,13 @@ import static org.h2.engine.Constants.MAX_NUMERIC_PRECISION;
 import static org.h2.engine.Constants.MAX_STRING_LENGTH;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.sql.Blob;
+import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -179,10 +183,10 @@ public class TestValue extends TestDb {
         testDataType(TypeInfo.TYPE_TIME, Time.class);
         testDataType(TypeInfo.TYPE_TIMESTAMP, Timestamp.class);
         testDataType(TypeInfo.TYPE_TIMESTAMP, java.util.Date.class);
-        testDataType(TypeInfo.TYPE_CLOB, java.io.Reader.class);
-        testDataType(TypeInfo.TYPE_CLOB, java.sql.Clob.class);
-        testDataType(TypeInfo.TYPE_BLOB, java.io.InputStream.class);
-        testDataType(TypeInfo.TYPE_BLOB, java.sql.Blob.class);
+        testDataType(TypeInfo.TYPE_CLOB, Reader.class);
+        testDataType(TypeInfo.TYPE_CLOB, Clob.class);
+        testDataType(TypeInfo.TYPE_BLOB, InputStream.class);
+        testDataType(TypeInfo.TYPE_BLOB, Blob.class);
         testDataType(TypeInfo.getTypeInfo(Value.ARRAY, Integer.MAX_VALUE, 0, TypeInfo.TYPE_JAVA_OBJECT),
                 Object[].class);
         testDataType(TypeInfo.TYPE_JAVA_OBJECT, StringBuffer.class);

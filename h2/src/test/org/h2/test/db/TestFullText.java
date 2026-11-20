@@ -384,11 +384,11 @@ public class TestFullText extends TestDb {
         stat.execute("CREATE TABLE TEST(ID INT PRIMARY KEY, NAME VARCHAR)");
         Method createIndexMethod = Class.forName(
                 LUCENE_FULLTEXT_CLASS_NAME).getMethod("createIndex",
-                new Class[] { java.sql.Connection.class,
+                new Class[] { Connection.class,
                         String.class, String.class, String.class });
         Method dropIndexMethod = Class.forName(
                 LUCENE_FULLTEXT_CLASS_NAME).getMethod("dropIndex",
-                new Class[] { java.sql.Connection.class,
+                new Class[] { Connection.class,
                         String.class, String.class });
         for (int i = 0; i < 10; i++) {
             createIndexMethod.invoke(null, conn, "PUBLIC", "TEST", null);

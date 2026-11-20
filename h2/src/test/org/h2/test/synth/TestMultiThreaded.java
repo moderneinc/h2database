@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
 
+import org.h2.test.TestAll;
 import org.h2.test.TestBase;
 import org.h2.test.TestDb;
 
@@ -25,7 +26,7 @@ public class TestMultiThreaded extends TestDb {
      * @param a ignored
      */
     public static void main(String... a) throws Exception {
-        org.h2.test.TestAll config = new org.h2.test.TestAll();
+        TestAll config = new TestAll();
         config.memory = true;
         config.big = true;
         System.out.println(config);

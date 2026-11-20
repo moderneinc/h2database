@@ -231,19 +231,19 @@ public class TestServlet extends TestDb {
         }
 
         @Override
-        public javax.servlet.ServletRegistration.Dynamic addServlet(
+        public ServletRegistration.Dynamic addServlet(
                 String arg0, String arg1) {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public javax.servlet.ServletRegistration.Dynamic addServlet(
+        public ServletRegistration.Dynamic addServlet(
                 String arg0, Servlet arg1) {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public javax.servlet.ServletRegistration.Dynamic addServlet(
+        public ServletRegistration.Dynamic addServlet(
                 String arg0, Class<? extends Servlet> arg1) {
             throw new UnsupportedOperationException();
         }

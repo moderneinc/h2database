@@ -8,6 +8,7 @@ package org.h2.test.bench;
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Random;
 
 /**
@@ -169,7 +170,7 @@ public class BenchA implements Bench {
             // TODO convert: should be able to convert date to timestamp
             // (by using 0 for remaining fields)
             // insertHistory.setDate(5, new java.sql.Date(current));
-            insertHistory.setTimestamp(5, new java.sql.Timestamp(current));
+            insertHistory.setTimestamp(5, new Timestamp(current));
             insertHistory.setString(6, BenchA.FILLER);
             database.update(insertHistory, "insertHistory");
 

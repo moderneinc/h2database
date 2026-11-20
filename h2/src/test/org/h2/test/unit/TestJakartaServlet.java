@@ -231,19 +231,19 @@ public class TestJakartaServlet extends TestDb {
         }
 
         @Override
-        public jakarta.servlet.ServletRegistration.Dynamic addServlet(
+        public ServletRegistration.Dynamic addServlet(
                 String arg0, String arg1) {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public jakarta.servlet.ServletRegistration.Dynamic addServlet(
+        public ServletRegistration.Dynamic addServlet(
                 String arg0, Servlet arg1) {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public jakarta.servlet.ServletRegistration.Dynamic addServlet(
+        public ServletRegistration.Dynamic addServlet(
                 String arg0, Class<? extends Servlet> arg1) {
             throw new UnsupportedOperationException();
         }

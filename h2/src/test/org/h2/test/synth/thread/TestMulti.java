@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.h2.Driver;
 import org.h2.test.TestBase;
 import org.h2.test.TestDb;
 
@@ -33,7 +34,7 @@ public class TestMulti extends TestDb {
 
     @Override
     public void test() throws Exception {
-        org.h2.Driver.load();
+        Driver.load();
         deleteDb("openClose");
 
         // int len = getSize(5, 100);

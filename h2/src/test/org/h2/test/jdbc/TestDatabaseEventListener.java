@@ -124,7 +124,7 @@ public class TestDatabaseEventListener extends TestDb {
         calledCreateIndex = false;
         p.put("DATABASE_EVENT_LISTENER",
                 MyDatabaseEventListener.class.getName());
-        try (Connection conn = org.h2.Driver.load().connect(url, p)) {/**/}
+        try (Connection conn = Driver.load().connect(url, p)) {/**/}
         assertFalse(calledCreateIndex);
     }
 
@@ -156,7 +156,7 @@ public class TestDatabaseEventListener extends TestDb {
         calledCreateIndex = false;
         p.put("DATABASE_EVENT_LISTENER",
                 MyDatabaseEventListener.class.getName());
-        conn = org.h2.Driver.load().connect(url, p);
+        conn = Driver.load().connect(url, p);
         conn.close();
         assertFalse(calledCreateIndex);
     }
@@ -184,7 +184,7 @@ public class TestDatabaseEventListener extends TestDb {
         calledOpened = false;
         calledScan = false;
         p.put("DATABASE_EVENT_LISTENER", MyDatabaseEventListener.class.getName());
-        conn = org.h2.Driver.load().connect(url, p);
+        conn = Driver.load().connect(url, p);
         conn.close();
         if (calledOpened) {
             assertFalse(calledScan);
@@ -198,9 +198,9 @@ public class TestDatabaseEventListener extends TestDb {
         calledOpened = false;
         calledClosingDatabase = false;
         p.put("DATABASE_EVENT_LISTENER", MyDatabaseEventListener.class.getName());
-        org.h2.Driver.load();
+        Driver.load();
         String url = "jdbc:h2:mem:databaseEventListener";
-        Connection conn = org.h2.Driver.load().connect(url, p);
+        Connection conn = Driver.load().connect(url, p);
         conn.close();
         assertTrue(calledOpened);
         assertTrue(calledClosingDatabase);
@@ -214,9 +214,9 @@ public class TestDatabaseEventListener extends TestDb {
         calledStatementEnd = false;
         calledStatementProgress = false;
         p.put("DATABASE_EVENT_LISTENER", MyDatabaseEventListener.class.getName());
-        org.h2.Driver.load();
+        Driver.load();
         String url = "jdbc:h2:mem:databaseEventListener";
-        Connection conn = org.h2.Driver.load().connect(url, p);
+        Connection conn = Driver.load().connect(url, p);
         Statement stat = conn.createStatement();
         stat.execute("create table test(id int primary key, name varchar)");
         stat.execute("select * from test");

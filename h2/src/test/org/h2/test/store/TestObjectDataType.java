@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
@@ -70,8 +71,8 @@ public class TestObjectDataType extends TestBase {
                 new UUID(Long.MIN_VALUE, Long.MIN_VALUE),
                 new UUID(Long.MIN_VALUE, 0), new UUID(0, 0),
                 new UUID(Long.MAX_VALUE, Long.MAX_VALUE),
-                new java.util.Date(0), new java.util.Date(1000),
-                new java.util.Date(4000), new java.util.Date(5000),
+                new Date(0), new Date(1000),
+                new Date(4000), new Date(5000),
                 new boolean[0], new boolean[] { false, false },
                 new boolean[] { true },
                 new byte[0], new byte[1], new byte[15], new byte[16],

@@ -11,6 +11,8 @@ import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import org.h2.Driver;
 import org.h2.store.fs.FileUtils;
 import org.h2.test.TestBase;
 import org.h2.test.TestDb;
@@ -87,7 +89,7 @@ public class TestRecovery extends TestDb {
     private void testCompressedAndUncompressed() throws SQLException {
         DeleteDbFiles.execute(getBaseDir(), "recovery", true);
         DeleteDbFiles.execute(getBaseDir(), "recovery2", true);
-        org.h2.Driver.load();
+        Driver.load();
         Connection conn = getConnection("recovery");
         Statement stat = conn.createStatement();
         stat.execute("create table test(id int primary key, data clob)");
@@ -118,7 +120,7 @@ public class TestRecovery extends TestDb {
     private void testRunScript() throws Exception {
         DeleteDbFiles.execute(getBaseDir(), "recovery", true);
         DeleteDbFiles.execute(getBaseDir(), "recovery2", true);
-        org.h2.Driver.load();
+        Driver.load();
         Connection conn = getConnection("recovery");
         Statement stat = conn.createStatement();
         stat.execute("create table \"Joe\"\"s Table\" as " +
@@ -178,7 +180,7 @@ public class TestRecovery extends TestDb {
     private void testRunScript2() throws Exception {
         DeleteDbFiles.execute(getBaseDir(), "recovery", true);
         DeleteDbFiles.execute(getBaseDir(), "recovery2", true);
-        org.h2.Driver.load();
+        Driver.load();
         Connection conn = getConnection("recovery");
         Statement stat = conn.createStatement();
         stat.execute("SET COLLATION EN");
